@@ -1,41 +1,49 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { forwardRef } from "react";
+
+import { TypeField } from "@/contexts/FormContext";
+import { DiscountOptionEnum } from "@/enums/DiscountOption";
+import { useFormContext } from "@/hooks/useFormContext";
+import { TypeVolumeDiscountSchema } from "@/lib/validators/volumeDiscount";
 import { Select } from "@shopify/polaris";
-import { FC, useCallback } from "react";
-import { ValueForm, ValueInputProps } from "../../../../context/FormContext";
-import { useFormContext } from "../../../../hooks/useFormContext";
 import { optionsSelectType } from "./constant";
 
 type SelectDiscountTypeProps = {
 	label: string;
-	form: ValueInputProps;
+	form: TypeField;
 	indexValue: number;
 };
 
-const SelectDiscountType: FC<SelectDiscountTypeProps> = ({
-	label,
-	form,
-	indexValue,
-}) => {
-	const { handleChangeRuleForm, register } = useFormContext();
+const SelectDiscountType = forwardRef<HTMLDivElement, SelectDiscountTypeProps>(
+	({ label, form, indexValue }, ref) => {
+		const { register, fields, setValue } = useFormContext();
 
-	const handleChange = useCallback(
-		(value: string) => {
-			handleChangeRuleForm(value, "discountType", indexValue);
-		},
-		[handleChangeRuleForm, indexValue]
-	);
+		const key =
+			`rule[${indexValue}].discountType` as keyof TypeVolumeDiscountSchema;
 
-	const key = `rule[${indexValue}].discountType` as keyof ValueForm;
+		const updateFieldValue = (index: number, newValue: DiscountOptionEnum) => {
+			const updatedFields = fields.map((field, i) => {
+				if (i === index) {
+					return { ...field, discountType: newValue };
+				}
+				return field;
+			});
+			setValue(`rule`, updatedFields);
+		};
 
-	return (
-		<Select
-			{...(register(key) as any)}
-			label={label}
-			options={optionsSelectType}
-			onChange={handleChange}
-			value={form.discountType}
-		/>
-	);
-};
+		return (
+			<Select
+				{...register(key)}
+				label={label}
+				options={optionsSelectType}
+				ref={ref}
+				value={form.discountType}
+				onChange={(value: DiscountOptionEnum) => {
+					updateFieldValue(indexValue, value);
+				}}
+			/>
+		);
+	}
+);
 
 export default SelectDiscountType;

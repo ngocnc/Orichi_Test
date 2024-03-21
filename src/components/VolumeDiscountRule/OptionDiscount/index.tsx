@@ -1,24 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Grid, Icon } from "@shopify/polaris";
 import { DeleteIcon } from "@shopify/polaris-icons";
 import { FC } from "react";
-import { ValueInputProps } from "../../../context/FormContext";
-import { useFormContext } from "../../../hooks/useFormContext";
-import InputField from "./InputField";
+
+import { TypeField } from "@/contexts/FormContext";
+import { useFormContext } from "@/hooks/useFormContext";
+import InputOptionField from "./InputOptionField";
 import SelectDiscountType from "./SelectDiscountType";
 import { ComponentEnum, OptionDiscountProps, optionsInput } from "./constant";
 
 type Props = {
-	form: ValueInputProps;
+	form: TypeField;
 	indexValue: number;
 };
 
 const OptionDiscount: FC<Props> = ({ form, indexValue }) => {
-	const { handleRemoveRuleForm } = useFormContext();
+	const { remove } = useFormContext();
 
 	const renderComponents = (props: OptionDiscountProps) => {
 		return {
 			[ComponentEnum.input]: (
-				<InputField inputProps={props} form={form} indexValue={indexValue} />
+				<InputOptionField
+					inputProps={props}
+					form={form}
+					indexValue={indexValue}
+				/>
 			),
 			[ComponentEnum.select]: (
 				<SelectDiscountType
@@ -33,7 +39,7 @@ const OptionDiscount: FC<Props> = ({ form, indexValue }) => {
 	return (
 		<div className="container-volume">
 			<p className="custom-icon">
-				<span onClick={() => handleRemoveRuleForm(indexValue)}>
+				<span onClick={() => remove(indexValue)}>
 					<Icon source={DeleteIcon} tone="base" />
 				</span>
 			</p>

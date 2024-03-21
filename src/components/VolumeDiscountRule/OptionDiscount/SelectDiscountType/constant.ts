@@ -1,20 +1,16 @@
-export enum OptionEnum {
-	NONE = "NONE",
-	DISCOUNT = "DISCOUNT",
-	DISCOUNT_EACH = "DISCOUNT_EACH",
-}
+import { DiscountOptionEnum } from "@/enums/DiscountOption";
 
 export const optionsSelectType = [
 	{
 		label: "None",
-		value: OptionEnum.NONE,
+		value: DiscountOptionEnum.NONE,
 	},
 	{
 		label: "% discount",
-		value: OptionEnum.DISCOUNT,
+		value: DiscountOptionEnum.DISCOUNT,
 	},
 	{
 		label: "Discount / each",
-		value: OptionEnum.DISCOUNT_EACH,
+		value: DiscountOptionEnum.DISCOUNT_EACH,
 	},
 ];

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC } from "react";
+import { TypeField } from "@/contexts/FormContext";
+import { forwardRef } from "react";
 
-type Props = any;
+type Props = TypeField & React.InputHTMLAttributes<HTMLInputElement>;
 
-const InputField: FC<Props> = (props) => {
+const InputField = forwardRef<HTMLDivElement, Props>((props, ref) => {
 	return (
-		<>
+		<div className="" ref={ref}>
 			<div className="Polaris-Labelled__LabelWrapper">
 				<div className="Polaris-Label">
 					<label htmlFor={props.name}>{props.label}</label>
@@ -23,8 +24,8 @@ const InputField: FC<Props> = (props) => {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
-};
+});
 
 export default InputField;

@@ -44,3 +44,31 @@
 .custom-button svg {
 	fill: #fff !important;
 }
+
+.custom-table .Polaris-LegacyCard,
+.custom-table .Polaris-LegacyCard::before {
+	border-radius: 0 !important;
+	box-shadow: none;
+}
+
+.container-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.container-header__text {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+}
+
+.container-header__icon {
+	border: 1px solid var(--p-color-bg-fill-inverse-active);
+	padding: 5px;
+}
+
+.error-message {
+	color: var(--p-color-icon-critical);
+}

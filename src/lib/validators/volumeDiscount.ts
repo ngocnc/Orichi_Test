@@ -1,5 +1,5 @@
+import { DiscountOptionEnum } from "@/enums/DiscountOption";
 import { z } from "zod";
-import { OptionEnum } from "../../components/VolumeDiscountRule/OptionDiscount/SelectDiscountType/constant";
 
 export const volumeDiscountSchema = z.object({
 	campaignName: z.string().min(1, "Campaign name is required"),
@@ -12,7 +12,7 @@ export const volumeDiscountSchema = z.object({
 				subtitle: z.string().optional(),
 				label: z.string().optional(),
 				quantity: z.number().min(1, "Quantity is required"),
-				discountType: z.nativeEnum(OptionEnum),
+				discountType: z.nativeEnum(DiscountOptionEnum),
 				amount: z.number().optional(),
 			})
 			.refine(

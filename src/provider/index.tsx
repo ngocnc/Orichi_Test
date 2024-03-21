@@ -1,17 +1,12 @@
 import { FC } from "react";
-import FormProvider from "../context/FormContext";
-import SelectContextProvider from "../context/SelectContext";
+import FormProvider from "../contexts/FormContext";
 
 type ProviderProps = {
 	children: React.ReactNode;
 };
 
 const Provider: FC<ProviderProps> = ({ children }) => {
-	return (
-		<FormProvider>
-			<SelectContextProvider>{children}</SelectContextProvider>
-		</FormProvider>
-	);
+	return <FormProvider>{children}</FormProvider>;
 };
 
 export default Provider;

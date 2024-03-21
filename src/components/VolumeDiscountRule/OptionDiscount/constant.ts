@@ -1,5 +1,6 @@
 import { TextFieldProps } from "@shopify/polaris";
-import { OptionEnum } from "./SelectDiscountType/constant";
+
+import { DiscountOptionEnum } from "@/enums/DiscountOption";
 
 export enum ComponentEnum {
 	input = "input",
@@ -10,7 +11,9 @@ export type OptionDiscountProps = TextFieldProps & {
 	component: ComponentEnum;
 };
 
-export const optionsInput = (selected: OptionEnum): OptionDiscountProps[] => {
+export const optionsInput = (
+	selected: DiscountOptionEnum
+): OptionDiscountProps[] => {
 	const commonOptions: OptionDiscountProps[] = [
 		{
 			name: "titleOption",
@@ -54,7 +57,7 @@ export const optionsInput = (selected: OptionEnum): OptionDiscountProps[] => {
 		},
 	];
 
-	if (selected !== OptionEnum.NONE) {
+	if (selected !== DiscountOptionEnum.NONE) {
 		return [
 			...commonOptions,
 			{

@@ -1,19 +1,29 @@
 import { DataTable, LegacyCard } from "@shopify/polaris";
 import { FC } from "react";
-import { useFormContext } from "../../../hooks/useFormContext";
+
+import { DiscountOptionEnum } from "@/enums/DiscountOption";
+import { useFormContext } from "@/hooks/useFormContext";
 
 const TablePreview: FC = () => {
-	const { valueForms } = useFormContext();
+	const { getValues } = useFormContext();
 
-	const rows = valueForms.rule.map((value) => {
-		const { title, discountType, quantity, amount } = value;
-		return [title, discountType, quantity, amount && `${amount}%`];
+	const rows = getValues("rule").map((value) => {
+		const { titleOption, discountType, quantity, amount } = value;
+		return [
+			titleOption,
+			discountType,
+			quantity,
+			amount &&
+				`${amount}${
+					value.discountType === DiscountOptionEnum.DISCOUNT ? "%" : "$"
+				}`,
+		];
 	});
 
 	return (
 		<LegacyCard>
 			<DataTable
-				columnContentTypes={["text", "text", "numeric", "numeric"]}
+				columnContentTypes={["text", "numeric", "numeric", "numeric"]}
 				headings={["Title", "Discount Type", "Quantity", "Amount"]}
 				rows={rows}
 			/>
