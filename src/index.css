@@ -1,0 +1,46 @@
+.container-volume {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	position: relative;
+	padding: 30px;
+}
+
+.tag-volume {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: var(--p-color-icon-critical);
+	padding: 5px 20px 5px 5px;
+	border-bottom-right-radius: 12px;
+	text-transform: uppercase;
+	color: #fff;
+}
+
+.custom-icon {
+	display: flex;
+	justify-content: end;
+}
+
+.custom-icon .Polaris-Icon {
+	margin: auto 0 auto;
+	width: 1.7rem;
+	height: 1.7rem;
+	cursor: pointer;
+}
+
+.custom-button {
+	padding: 10px 30px;
+}
+
+.custom-button .Polaris-Button {
+	background-color: var(--p-color-icon-critical);
+	color: #fff;
+	width: 100%;
+	padding: 10px 0;
+	font-size: 1rem;
+}
+
+.custom-button svg {
+	fill: #fff !important;
+}
